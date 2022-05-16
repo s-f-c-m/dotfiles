@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Filename:      /etc/skel/.zshrc
 # Purpose:       config file for zsh (z shell)
@@ -314,6 +314,10 @@ alias lvim='/home/sebastian/.local/bin/lvim'
 #    fi
 #}
 
+getlpass(){
+  lpass ls $1 | grep $2 | awk '{print $NF}' | sed 's/]//g' | xargs lpass show -cp
+}
+
 ## log out? set timeout in seconds...
 ## ...and do not log out in some specific terminals:
 #if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|screen*) ]] ; then
@@ -351,12 +355,15 @@ alias lvim='/home/sebastian/.local/bin/lvim'
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 export PATH=$PATH:~/.yarn/bin
+export PATH=$PATH:~/bin
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+eval "$(starship init zsh)"

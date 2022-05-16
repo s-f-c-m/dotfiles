@@ -3,16 +3,23 @@
 #pgrep -x sxhkd > /dev/null || sxhkd &
 sxhkd &
 nm-applet &
-$HOME/.config/polybar/launch.sh --shades
+if [ -x $HOME/bin/check_laptop_dual_monitor.sh ];then
+    $HOME/bin/check_laptop_dual_monitor.sh
+fi
+#$HOME/.config/polybar/launch.sh --shades
+$HOME/bin/polybar_multimonitor.sh
 feh --bg-fill /usr/share/backgrounds/bspwm/frida.png
 picom --no-vsync --no-use-damage&
 o
 
-#bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor -d I II III IV V
+# bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor eDP-1 -d VI VII VIII IX X
+bspc monitor HDMI-1-0 -d I II III IV V
+#bspc monitor -HDMI-1-2 d 1 2 3 4 5
+#bspc monitor eDP-1 -d 6 7 8 9 0 
 
 
-bspc config border_width         5
+bspc config border_width         1
 bspc config window_gap          15
 
 bspc config split_ratio          0.52
@@ -20,9 +27,7 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a firefox desktop='^2'
+bspc rule -a firefox desktop=^7
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
-
-
